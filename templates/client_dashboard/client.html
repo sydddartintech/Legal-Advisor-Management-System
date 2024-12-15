@@ -1,0 +1,90 @@
+
+{% extends 'client_dashboard/client_layout.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+    .white-text {
+    color: white;
+}
+</style>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Dashboard</h1>
+                       
+                        <div class="row">
+
+                            <div class="col-xl-3 col-md-6">
+                                <a href="{% url 'my_profile' %}"class="white-text">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body"><i class="pull-left fa fa-user icon-rounded"></i><h3>My Profile</h3></div>
+                                    
+                                        </a>
+                                        
+                                    
+
+                                </div>
+                            
+                        </div>
+                            <div class="col-xl-3 col-md-6">
+                                <a href="{% url 'ongoing_case' %}"class="white-text">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body"><i class="pull-left fa fa-list user2 icon-rounded"></i><h3>Case Details</h3></div>
+                                    
+                                        </a>
+                                        
+                                    
+</div>
+                                </div>
+                            <div class="col-xl-3 col-md-6">
+                                <a href="{% url 'change_password' %}"class="white-text">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body"><i class="pull-left fa fa-edit dollar1 icon-rounded"></i><h3>Change Password</h3></div>
+                                    
+                                        </a>
+                                        
+                                    
+</div>
+</div>
+                            <div class="col-xl-3 col-md-6">
+                                <a href="{% url 'logout' %}"class="white-text">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body"><i class="pull-left fa fa-sign-out dollar2 icon-rounded"></i><h3>Logout</h3></div>
+                                    
+                                        </a>
+                                        
+                                    
+</div>
+</div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        Area Chart Example
+                                    </div>
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            
+                        </div> -->
+                        
+                    </div>
+                </main>
+                <!-- <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            
+                        </div>
+                    </div>
+                </footer> -->
+            </div>
+        </div>
+          {% endblock %}

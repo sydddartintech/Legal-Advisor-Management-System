@@ -1,0 +1,60 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Case Schedule</h1>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fa fa-calendar"></i>
+                                    Add Case Schedule
+                                </div>
+                                <div class="card-body">
+                                    <form role="form" method="post" action="{% url 'save_case_schedule' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                 <div class="form-group"> 
+                                    <label for="regdate">Scheduled Date</label> 
+                                    <input type="date" name="sdate" class="form-control" id="sdate"  required="" min="{% now 'Y-m-d' %}" >
+                                   <br>
+                                </div>
+                    <div class="form-group">
+                                                  <label for="Category">Remarks</label><br>
+                                                    <textarea name="remarks" class="form-control" id="exampleInputEmail1" required="" > </textarea><br>
+                                                </div>
+                                                 
+                                             
+                                                
+                                            
+                                            
+                    
+                            
+                             <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="reset" class="btn btn-danger">Cancel</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="hidden" name="cno" value="{{case_no}}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

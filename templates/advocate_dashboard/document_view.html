@@ -1,0 +1,114 @@
+
+{% extends 'advocate_dashboard/adv_layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .label-info {
+    background-color: #58D68D ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+
+.label-success {
+    background-color: #27AE60 ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+    </style>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Case Documents </h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                         Case Documents-(case number-{{case_no}})
+                                          {% if case_list.status == 'Progressing' %}
+                                         <a href="{% url 'case_doc_add' case_no%}" class="btn btn-info btn-sm" style="margin-left: 900px;width: 150px; height: 40;">Add Documents</a>
+                                         {% endif %}
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th> 
+                                                    <th>TITLE</th>  
+                                                    <th>DESCRIPTION</th> 
+                                                    <th>FILE</th> 
+                                                    <th>UPLOADED DATE</th>
+                                                    <th>UPLOADED BY</th> 
+                                                      <th>ACTIONS</th> 
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for doc in doc_list %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{doc.doc_title}}</td>
+                                                    <td>{{doc.doc_desc}}</td>
+                                                    <td>
+                                                        {% if doc.uploaded_by != user %}<a href="/media/documents/{{ doc.doc_file }}" target="_blank" class="btn btn-default"><img src="{% static 'pdf_image.png' %}" width="100" height="100"></a><br>
+
+                                                         {% else %}
+                                                         <a href="/media/documents/{{ doc.doc_file }}" target="_blank" class="btn btn-default"><img src="{% static 'pdf_image.png' %}" width="100" height="100"></a><br>
+
+                                                        {% if case_list.status == 'Progressing' %}
+                                                       
+                                                        <a href="{% url 'change_document' doc.doc_id %}" class="btn btn-primary" style="width: 80px; height: 12;font-size: 10px;">Change File</a>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                </td>
+
+                                                    <td>{{doc.doc_uploaded_date|date:"d-m-Y"}}</td>
+                                                    <td>{{doc.uploaded_by}}</td>
+                                                    {% if doc.uploaded_by != user %}
+                                                    <td style="color: blue;">No Permission</td>
+                                                    {% else %}
+                                                     {% if case_list.status == 'Progressing' %}
+                                                   
+                                                    <td> <a href="{% url 'edit_document' doc.doc_id %}" class="btn btn-success btn-sm" style="width: 60px;font-size: 12px;">EDIT</a>
+                                                        <a href="{% url 'delete_document' doc.doc_id %}" class="btn btn-danger btn-sm" style="width: 60px;font-size: 12px;">DELETE</a></td>
+                                                        {% else %}
+                                                        <td style="color: green;"> Closed Case</td>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                </tr>
+                                               {% endfor %} 
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

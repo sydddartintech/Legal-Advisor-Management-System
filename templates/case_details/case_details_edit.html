@@ -1,0 +1,115 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Add this script at the end of your HTML, after jQuery -->
+<script type="text/javascript">
+    
+$(document).ready(function () {
+    
+    // Function to load advocates based on the selected category
+    function loadAdvocates(category) {
+        $.ajax({
+            type: "GET",
+            url: '{% url "get_advocate" %}',
+            data: { 'catid': category },
+            cache: false,
+            async: false,
+            dataType: 'json',
+            success: function (response) {
+                // Clear existing options
+                $("#advocate").empty();
+                // Append new options
+                $("#advocate").append(response.options_html);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.error("AJAX Error:", errorThrown);
+            }
+        });
+    }
+
+    // Load advocates when the page loads
+    
+
+    // Update advocates when the category changes
+    $("#category").change(function () {
+        var category = $("#category").val();
+        
+        loadAdvocates(category);
+    });
+});
+
+</script>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Case Details</h1>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-book-open"></i>
+                                    Edit Case Details
+                                </div>
+                                <div class="card-body">
+                                    <form role="form" method="post" action="{% url 'update_case_details' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                    <div class="form-group">
+                                                  <label for="Category">Case Description</label><br>
+                                                    <textarea name="desc" class="form-control" id="exampleInputEmail1" required="" >{{case_list.description}}</textarea><br>
+                                                </div>
+                                                 <div class="form-group"> 
+                                    <label for="regdate">Case Register Date:</label> 
+                                    <input type="date" name="regdate" class="form-control" id="regdate"  required="" max="{% now 'Y-m-d' %}" value="{{case_list.case_register_date|date:'Y-m-d'}}">
+                                   <br>
+                                </div>
+                                           <div class="form-group"> 
+                                    <label for="regdate">Case Start Date:</label> 
+                                    <input type="date" name="stdate" class="form-control" id="stdate"  required="" " value="{{case_list.case_start_date|date:'Y-m-d'}}">
+                                   <br>
+                                </div>      
+                                                
+                                            </div>
+                                            <div class="col-md-6">
+                                               
+                    
+                            
+                    <div class="form-group">
+                                                  <label for="Category">Remarks</label><br>
+                                                    <textarea name="remarks" class="form-control" id="remarks" required="" >{{case_list.remark}}</textarea><br>
+                                                </div>
+                              <div class="form-group"> 
+                                <label for="cstatus">Case Status</label> 
+                                <br>
+                                <input type="radio" name="status" value="Progressing"{% if case_list.status == 'Progressing' %} checked {% endif %}> Progressing
+                                <br>
+                                <input type="radio" name="status" value="Closed"{% if case_list.status == 'Closed' %} checked {% endif %}> Closed<br><br>
+                              </div> 
+                              
+                             <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="reset" class="btn btn-danger">Cancel</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="hidden" name="cno" value="{{case_list.case_no}}">
+                                        <input type="hidden" name="clid" value="{{case_list.clientid}}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

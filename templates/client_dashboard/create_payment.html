@@ -1,0 +1,79 @@
+
+{% extends 'client_dashboard/client_layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .label-info {
+    background-color: #58D68D ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+
+.label-success {
+    background-color: #27AE60 ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+    </style>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Transaction Details</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    
+                                    <div class="card-body">
+                                        <form role="form" method="post" action="{% url 'client_transaction' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                     <label for="fname">Accepted Cards</label>
+                <div class="icon-container">
+                <i class="fa-brands fa-cc-visa" style="color:navy;"></i>
+                <i class="fa-brands fa-cc-amex" style="color:blue;"></i>
+                <i class="fa-brands fa-cc-mastercard" style="color:red;"></i>
+                <i class="fa-brands fa-cc-discover" style="color:orange;"></i>
+                </div>
+                <label for="cname">Name on Card*</label>
+                <input type="text" id="cname" name="cardname" class="form-control" pattern="^[a-zA-Z ]+$" required="">
+                <div class="form-group" id="card-number-field">
+                <label for="cardNumber">Card Number*</label>
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" required="">
+            </div>
+            <label for="expdate">Exp Date*</label>
+                <input type="text" id="expdate" name="expdate" class="form-control"  placeholder="12/2022" required>
+                <div class="form-group CVV">
+                        <label for="cvv">CVV*</label>
+                        <input type="text" class="form-control" name="cvv" id="cvv" required="">
+                </div>
+                <div class="form-group CVV">
+                        <label for="cvv">Amount*</label>
+                        <input type="text" class="form-control" name="amount" id="amount" value=""   required="">
+                </div>
+
+                <div class="form-group CVV">
+                        <label for="cvv">Remarks*</label>
+                        <textarea   class="form-control" name="remarks"   required=""></textarea><br>
+                </div>
+                <input class="btn btn-danger btn-block" value="Pay Now" name="btn_submit" type="submit">
+            </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

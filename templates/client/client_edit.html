@@ -1,0 +1,126 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Client Details</h1>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fa fa-users"></i>
+                                    Edit Client
+                                </div>
+                                <div class="card-body">
+                                    <form role="form" method="post" action="{% url 'update_client' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Category">First Name</label><br>
+                                                    <input type="text" name="fname" class="form-control" id="category" placeholder="First Name" required pattern="[A-Za-z ]+" title="Characters only" value="{{cl_li.first_name}}"><br>
+                                                </div>
+                                                 <div class="form-group">
+                                                  <label for="Category">Last Name</label><br>
+                                                    <input type="text" name="lname" class="form-control" id="category" placeholder="Last Name" required pattern="[A-Za-z ]+" title="Characters only" value="{{cl_li.last_name}}"><br>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="Category">Address</label><br>
+                                                    <textarea name="address" class="form-control" id="exampleInputEmail1" required="" placeholder="Enter Address">{{cl_li.address}}</textarea><br>
+                                                </div>
+                                                <div class="form-group"> 
+                                    <label for="exampleInputEmail1">DOB:</label> 
+                                    <input type="date" name="dob" class="form-control" id="dob"  required=""  value="{{cl_li.dob| date:'Y-m-d'}}">
+                                    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var today = new Date();
+        var maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        var dobInput = document.getElementById('dob');
+        dobInput.max = maxDate.toISOString().split('T')[0]; // Set the max attribute to the formatted date
+    });
+</script> <br>
+                                </div>
+                                                <div class="form-group"> 
+                                <label for="exampleInputPassword1">Gender</label> 
+                                <br>
+                              <input type="radio" name="gender" value="male" {% if cl_li.gender == 'male' %} checked {% endif %}> Male
+    <br>
+    <input type="radio" name="gender" value="female" {% if cl_li.gender == 'female' %} checked {% endif %}> Female<br>
+                              </div> 
+                              <div class="form-group"> 
+                                <label for="exampleInputEmail1">Mobile Number:</label> <input name="pno" type="text" class="form-control" id="exampleInputEmail1" placeholder="Your Phone Number" required="" pattern="[9876][0-9]{9}" title="Enter a valid mobile number" maxlength="10" minlength="10"  value="{{cl_li.mobile}}"><br>
+                              </div>
+                             
+                              
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                                 <div class="form-group"> 
+                                    <label for="exampleInputPassword1">State</label> 
+                                    <select class="form-control" required="" name="state">
+                                        <option value="">--Select state--</option>
+                                         <option value="{{cl_li.state}}" {% if  cl_li.state == 'Kerala'   %} selected="selected" {% endif %}>Kerala</option>
+                                    
+                                    </select><br>
+                                </div>
+                                <div class="form-group"> 
+                                    <label for="exampleInputPassword1">District</label> 
+                                    <select class="form-control" required="" name="district">
+                                        <option value="">--Select District--</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Kottayam'   %} selected="selected" {% endif %}>Kottayam</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Alappey'   %} selected="selected" {% endif %}>Alappey</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Idukki'   %} selected="selected" {% endif %}>Idukki</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Pathanamthitta'   %} selected="selected" {% endif %}>Pathanamthitta</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Kollam'   %} selected="selected" {% endif %}>Kollam</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Thiruvananthapuram'   %} selected="selected" {% endif %}>Thiruvananthapuram</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Malappuram'   %} selected="selected" {% endif %}>Malappuram</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Kozhikode'   %} selected="selected" {% endif %}>Kozhikode</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Wayanad'   %} selected="selected" {% endif %}>Wayanad</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Kasargod'   %} selected="selected" {% endif %}>Kasargod</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Thrissur'   %} selected="selected" {% endif %}>Thrissur</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Palakkad'   %} selected="selected" {% endif %}>Palakkad</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Kannur'   %} selected="selected" {% endif %}>Kannur</option>
+                                        <option value="{{cl_li.district}}" {% if  cl_li.district == 'Ernakulam'   %} selected="selected" {% endif %}>Ernakulam</option>
+                                
+                
+                                    </select><br>
+                                </div> 
+                                     <div class="form-group"> 
+                                    <label for="exampleInputPassword1">Location</label> 
+                                    <input type="text" name="location" class="form-control" id="location" placeholder="Location" required="" pattern="[a-zA-Z\s]+" title="only alphabets and spaces allowed" value="{{cl_li.location}}"><br>
+                                </div>  
+                                <div class="form-group"> 
+                                    <label for="exampleInputPassword1">Pincode</label> 
+                                    <input type="text" name="pincode" class="form-control" id="exampleInputPassword1" placeholder="Pincode" required=""  maxlength="6" minlength="6" pattern="[0-9]{6}"  title="Invalid format" value="{{cl_li.pin}}"><br>
+                                </div>   
+                                 <div class="form-group"> 
+                                    <label for="exampleInputPassword1">Aadhaar Number:</label> 
+                                    <input type="text" name="aadhaarno" class="form-control" id="aadhaarno" placeholder="Your Aadhaar Number (Eg. 0000 0000 0000)" required="" pattern="^\d{4}\s\d{4}\s\d{4}$" title="Invalid Data"value="{{cl_li.aadhaar_no}}"><br>
+                                </div>        
+                    
+                            
+                              <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="reset" class="btn btn-danger">Cancel</button>
+                             
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="hidden" name="cl_id" value="{{cl_li.client_id}}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

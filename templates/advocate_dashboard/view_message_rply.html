@@ -1,0 +1,144 @@
+
+{% extends 'advocate_dashboard/adv_layout.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+    .forms h4 {
+    font-size: 1.7em;
+}
+p
+{
+    font-size: 15px;
+}
+</style>
+<script type="text/javascript">
+$(document).on("click", ".open-AddBookDialog", function () {
+     var mesgid= $(this).data('id');
+     var fmesgid= $(this).data('fid');
+     document.getElementById('messageid').value = mesgid;
+      document.getElementById('fmessageid').value = fmesgid;
+    // $(".modal-body #messageid").val( messageid );
+      $('#exampleModal').modal('show');
+});
+</script>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Message Panel</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                         Messages
+                                         
+                                    </div>
+                                    <div class="card-body">
+                                                                <div class="media">
+            
+                <div class="media-left">
+                    {% if msg_list.posted_by|length != 0 %}
+                        {% if adv_list.photo|length != 0 %}
+                            <img src="{% get_media_prefix %}/{{ adv_list.photo}}" alt="{{ prof.first_name }} Photo" class="media-object" style="width:45px;margin-right: 10px;border-radius: 50%;">
+
+                            <?php
+                        
+                        {% else %}
+                        
+                            <img src="{% static 'user2.png' %}"  class="media-object" style="width:45px;margin-right: 10px;">
+                            
+                          {% endif %} 
+                    {% else %}
+                    <img src="{% static 'user2.png' %}"  class="media-object" style="width:45px;margin-right: 10px;">
+                        <?php
+                    {% endif %}
+                </div>
+                <div class="media-body">
+                    
+                        <h4 class="media-heading">Anonymous <small><i>Posted on {{msg_list.post_date|date:"d-m-Y"}}</i></small></h4>
+                    <p style="font-size: 17px">{{msg_list.message}}</p>
+
+                    <br><a data-toggle="modal" data-id="{{msg_list.message_id}}" data-fid="{{msg_list.message_id}}" title="Add this item" class="open-AddBookDialog btn btn-warning btn-sm" href="#addBookDialog">Reply</a>
+                    
+                        {% for r in rply %}
+
+                <!-- Nested media object -->
+                    <div class="media">
+                        <div class="media-left">
+                            {% if r.posted_by|length != 0 %}
+                               
+                               {% if adv_list.photo|length != 0 %}
+                            
+
+                                
+                                    <img src="{% get_media_prefix %}/{{ adv_list.photo}}" alt="{{ prof.first_name }} Photo" class="media-object" style="width:45px;margin-right: 7px;border-radius: 50%;">
+
+                                    {% else %}
+                                    <img src="{% static 'user2.png' %}"  class="media-object" style="width:45px;margin-right: 7px;">
+                                    {% endif %}
+                                    {% else %}
+                            <img src="{% static 'user2.png' %}"  class="media-object" style="width:45px;margin-right: 7px;">
+                              {% endif %}   
+
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" style="font-size: 18px;">Adv.{{adv_list.first_name}}<small><i> Posted on {{r.post_date|date:"d-m-Y"}} </i></small></h4>
+                            <p>{{r.message}}</p>
+                            {% if r.posted_by == uname %}
+
+                            <br><a data-toggle="modal" data-id="<?php echo $r['message_id']; ?>" data-fid="<?php echo $oldmsid; ?>"title="Add this item" class="open-AddBookDialog btn btn-success btn-sm" href="#addBookDialog">Reply</a>
+
+                            {% endif %}
+                            
+
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form method="post" action="{% url 'save_rply' %}">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 17px;font-weight: 550;">Write Your Reply</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea name="reply" class="form-control" style="height: 100px" placeholder="Type Here..."></textarea>
+        <input type="hidden" name="messageid" id="messageid" value=""/>
+        <input type="hidden" name="fmessageid" id="fmessageid" value=""/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+          {% endblock %}

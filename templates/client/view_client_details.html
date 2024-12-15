@@ -1,0 +1,92 @@
+
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Client Details</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-10">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fa fa-users"></i>
+                                         View Client Details
+                                    </div>
+                                    <div class="card-body">
+
+                                        <table class="table">
+                                    
+                                    <tr>
+                                      <th>Name</th>
+                                      <td>{{cl_li.first_name}} {{cl_li.last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Address</th>
+                                      <td>{{cl_li.address}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>DOB</th>
+                                      <td>{{cl_li.dob|date:"d-m-Y"}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Gender</th>
+                                      <td>{{cl_li.gender}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>State</th>
+                                      <td>{{cl_li.state}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>District</th>
+                                      <td>{{cl_li.district}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Location</th>
+                                      <td>{{cl_li.location}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Pincode</th>
+                                      <td>{{cl_li.pin}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Mobile Number</th>
+                                      <td>{{cl_li.mobile}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Email Id</th>
+                                      <td>{{cl_li.email_id}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Aadhaar Number</th>
+                                      <td>{{cl_li.aadhaar_no}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                    <a href="{% url 'client_edit' cl_li.client_id %}" class="btn btn-info btn-sm">EDIT DETAILS</a></td></tr>
+
+                                </table>
+                
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

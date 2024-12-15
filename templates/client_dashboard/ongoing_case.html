@@ -1,0 +1,80 @@
+
+{% extends 'client_dashboard/client_layout.html' %}
+{% load static %}
+{% block content %}
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Case Details</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fa-solid fa-book-open"></i></i>
+                                         Case Details
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th> 
+                                                    <th>CASE NUMBER</th>  
+                                                    <th>CATEGORY</th> 
+                                                    <th>DESCRIPTION</th> 
+                                                    <th>SCHEDULE</th> 
+                                                     
+                                                    <th>ACTIONS</th> 
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for case in case_list %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    
+                                                    <td>{{case.case_no}}</td>
+                                                    <td>{{case.cat_name}}</td>
+                                                    <td>{{case.description}}</td>
+                                                    
+                                                    <td><a href="{% url 'schedule_details' case.case_no %}" class="btn btn-info">SCHEDULE</a></td>
+                                                    <td> 
+                         <a href="{% url 'case_details_client' case.case_no %}" class="btn btn-success">VIEW MORE</a>
+                         
+                        </td>
+                                                </tr>
+                                                
+                                                {% endfor %}    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

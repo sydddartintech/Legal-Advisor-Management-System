@@ -1,0 +1,81 @@
+
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Case Category List</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    {% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}">
+    <h5 class="">{{message}}</h5>
+</div>
+{% endfor %}
+{% endif %}
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                         Case Category List
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th> 
+                                                    <th>CATEGORY NAME</th>  
+   
+                                                    <th>ACTIONS</th> 
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for categ in categ_list %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{categ.cat_name}}</td>
+                                                    
+                                                    <td> 
+                         <a href="{% url 'edit_category' categ.cat_id %}" class="btn btn-success">EDIT</a>
+                         <a href="{% url 'delete_category' categ.cat_id %}" class="btn btn-danger">DELETE</a>
+                        </td>
+                                                </tr>
+                                                
+                                                {% endfor %}    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

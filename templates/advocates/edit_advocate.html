@@ -1,0 +1,89 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Advocate Details</h1>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fa fa-users"></i>
+                                    Edit Advocate Details
+                                </div>
+                                <div class="card-body">
+                                    <form role="form" method="post" action="{% url 'update_advocates' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Category">First Name</label><br>
+                                                    <input type="text" name="fname" class="form-control" id="category" placeholder="First Name" required pattern="[A-Za-z ]+" title="Characters only" value="{{advocates.first_name}}"><br>
+                                                </div>
+                                                 <div class="form-group">
+                                                  <label for="Category">Last Name</label><br>
+                                                    <input type="text" name="lname" class="form-control" id="category" placeholder="Last Name" required pattern="[A-Za-z ]+" title="Characters only" value="{{advocates.last_name}}"><br>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="Category">Address</label><br>
+                                                    <textarea name="address" class="form-control" id="exampleInputEmail1" required="" placeholder="Enter Address">{{advocates.address}}</textarea><br>
+                                                </div>
+                                                <div class="form-group">
+    <label for="exampleInputPassword1">Gender</label>
+    <br>
+    <input type="radio" name="gender" value="male" {% if advocates.gender == 'male' %} checked {% endif %}> Male
+    <br>
+    <input type="radio" name="gender" value="female" {% if advocates.gender == 'female' %} checked {% endif %}> Female<br>
+</div>
+
+                              
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group"> 
+                                <label for="exampleInputEmail1">Mobile Number:</label> <input name="pno" type="text" class="form-control" id="exampleInputEmail1" placeholder="Your Phone Number" required="" pattern="[9876][0-9]{9}" title="Enter a valid mobile number" maxlength="10" minlength="10" value="{{advocates.phone}}"> <br>
+                              </div>
+                                                <div class="form-group">
+                                                    <label for="Category">Experience</label><br>
+                                                    <input type="text" name="experience" class="form-control" id="category" placeholder="Enter Experience" required value="{{advocates.experience}}"><br>
+                                                </div>
+                                                <div class="form-group">
+                        <label class="col-sm-3 control-label">Category</label>
+                        
+                            <select name="cat" required="" class="form-control">
+                            <option value="">SELECT</option>
+                          {% for c in categ_list %}
+                          
+                            
+                                <option value="{{c.cat_id}}" {% if c.cat_id  == advocates.case_cat_id   %} selected="selected" {% endif %}>{{c.cat_name}}</option>
+                                {% endfor %}    
+                                
+                            </select><br>
+                        
+                    </div>
+                    
+                            
+                              
+                             
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="reset" class="btn btn-danger">Cancel</button>
+                                        <input type="hidden" name="adv_id" value="{{ advocates.adv_id }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

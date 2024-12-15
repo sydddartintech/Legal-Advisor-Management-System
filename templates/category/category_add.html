@@ -1,0 +1,58 @@
+
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert {{message.tags}}">
+    <h5 class="">{{message}}</h5>
+</div>
+{% endfor %}
+{% endif %}
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Case Category</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                        Add Case Category
+                                    </div>
+                                    <div class="card-body">
+                                       <form role="form" method="post" action="{% url 'save_category' %}">
+                                  {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="Category">Category</label>
+                                    <input type="text" name="category" class="form-control" id="category" placeholder="Enter Category" required pattern="[A-Za-z ]+" title="Characters only" required="">
+                                </div>
+                                
+                               
+                              
+                              
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                 <button type="reset" class="btn btn-danger">Cancel</button>
+                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

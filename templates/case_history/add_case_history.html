@@ -1,0 +1,60 @@
+{% extends 'advocate_dashboard/adv_layout.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Case History</h1>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-book-open"></i>
+                                    Add Case History
+                                </div>
+                                <div class="card-body">
+                                    <form role="form" method="post" action="{% url 'save_history' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                 <div class="form-group"> 
+                                    <label for="regdate">Title</label> 
+                                    <input type="text" name="title" class="form-control" id="title"  required="">
+                                   <br>
+                                </div>
+                    <div class="form-group">
+                                                  <label for="Description">Description</label><br>
+                                                    <textarea name="desc" class="form-control" id="desc" required="" style="height: 80px"> </textarea><br>
+                                                </div>
+                                                 
+                                             
+                                                
+                                            
+                                            
+                    
+                            
+                             <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="reset" class="btn btn-danger">Cancel</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <input type="hidden" name="cno" value="{{case_no}}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

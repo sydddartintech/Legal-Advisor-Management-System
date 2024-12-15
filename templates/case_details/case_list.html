@@ -1,0 +1,116 @@
+
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .label-info {
+    background-color: #58D68D ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+
+.label-success {
+    background-color: #27AE60 ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+    </style>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    
+        {% if messages %}
+        {% for m in messages %}
+        <div class="alert {{m.tags}}">
+            <h5 class="">{{m}}</h5>
+        </div>
+        {% endfor %}
+        {% endif %}
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Case Details List</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                         Case Details
+                                         <a href="{% url 'add_case_details' clid %}" class="btn btn-info btn-sm" style="margin-left: 900px;width: 150px; height: 40;">Add Case Details</a>
+                                         <a href="{% url 'show_client' %}" class="btn btn-info btn-sm" >Back</a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th> 
+                                                    <th>CASE NUMBER</th>  
+                                                    <th>CATEGORY</th> 
+                                                    <th>DESCRIPTION</th> 
+                                                    <th>REGISTER DATE</th> 
+                                                    <th>START DATE</th> 
+                                                    <th>STATUS</th>  
+                                                    <th>SCHEDULED DETAILS</th> 
+                                                    <th>DETAILS</th>   
+                                                      <th>ACTIONS</th> 
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for clist in case_list %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{clist.case_no}}</td>
+                                                    <td>{{clist.cat_name}}</td>
+                                                    <td>{{clist.description}}</td>
+                                                    <td>{{clist.case_register_date|date:"d-m-Y"}}</td>
+                                                    <td>{{clist.case_start_date|date:"d-m-Y"}}</td>
+                                                    
+                                                    <td>
+    {% if clist.status == 'Progressing' %}
+        <span class="label label-info" style="position: relative; top: 5px;">in progress</span>
+    {% elif clist.status == 'Closed' %}
+        <span class="label label-success" style="position: relative; top: 5px;">completed </span>
+    {% endif %}
+</td>
+
+                                                    <td><a href="{% url 'view_case_schedule' clist.case_no  %}" class="btn btn-info btn-sm" style="width: 105px; font-size: 13px; color: white;">SCHEDULE</a></td>
+                                                    <td><a href="{% url 'view_case_documents' clist.case_no  %}" class="btn btn-warning btn-sm" style="width: 130px; font-size: 12px; color: white; background: #d01ca9">VIEW DOCUMENTS</a>
+                                                        <br>
+                                                        <a href="{% url 'view_case_history' clist.case_no  %}" class="btn btn-warning btn-sm" style="width: 130px; font-size: 12px; color: white; ">VIEW HISTORY</a></td>
+                                                    <td> <a href="{% url 'edit_case_details' clist.case_no %}" class="btn btn-success btn-sm" style="width: 60px;font-size: 12px;">EDIT</a><br>
+                                                        <a href="{% url 'delete_case_details' clist.case_no %}" class="btn btn-danger btn-sm" style="width: 60px;font-size: 12px;">DELETE</a></td>
+                                                </tr>
+                                               {% endfor %} 
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

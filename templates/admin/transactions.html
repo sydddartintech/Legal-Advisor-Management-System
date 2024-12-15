@@ -1,0 +1,93 @@
+
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .label-info {
+    background-color: #58D68D ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+
+.label-success {
+    background-color: #27AE60 ;
+    color: #fff;
+    /* Add any other styles as needed */
+}
+    </style>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Transaction Details</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                         
+                                         Transaction Details
+                                        
+                                         
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th>
+                                                  <th>NAME</th>   
+                                                    <th>DATE</th>  
+                                                    <th>AMOUNT</th> 
+                                                    <th>REMARKS</th> 
+                                                      
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for client_transactions in transactions %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{client_transactions.first_name}}</td>
+
+                                                    <td>{{client_transactions.trans_date|date:"d-m-Y"}}
+                                                    </td>
+                                                    <td>{{client_transactions.amount}}</td>
+                                                    <td>{{client_transactions.remarks}}</td>
+                                                    
+                                                    
+                                              
+                                               {% endfor %} 
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

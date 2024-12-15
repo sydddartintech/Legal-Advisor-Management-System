@@ -1,0 +1,80 @@
+
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4"></h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-10">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fa fa-users"></i>
+                                         Enquiry List
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th> 
+                                                     
+                                                    <th>NAME</th> 
+                                                      <th>POSTED DATE</th> 
+                                                      <th>ACTIONS</th> 
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for el in enq_list %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    
+                                                    <td>{{el.name}}</td>
+                                                    <td>{{el.post_date|date:"d-m-Y"}}</td>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    <td> 
+                         <a href="{% url 'enquiry_details' el.enq_id  %}" class="btn btn-info">VIEW DETAILS</a>
+                         
+                        </td>
+                                                </tr>
+                                                
+                                                {% endfor %}    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

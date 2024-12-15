@@ -1,0 +1,144 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+
+{% block content %}
+    <SCRIPT type="text/javascript">
+//************************************************************************************************************************************
+
+    function ValidateFileUpload() 
+    {
+        var fuData = document.getElementById('newfile');
+        var FileUploadPath = fuData.value;
+
+      console.log(FileUploadPath);
+      if (FileUploadPath == '') 
+        {
+            alert("Please upload an image");
+
+        }
+           else
+        {
+                var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+              //  console.log(Extension);
+                if (Extension == "gif" || Extension == "png" || Extension == "bmp" || Extension == "jpeg" || Extension == "jpg") 
+                    {
+
+// To Display
+                if (fuData.files && fuData.files[0]) 
+                {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) 
+                    {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+
+            } 
+            else
+            {
+                alert("Photo only allows file types of GIF, PNG, JPG, JPEG and BMP.");
+                 location.href="register.php";
+                 
+            }
+        }
+     
+        
+    }
+    
+//*************************************************************************************************************************
+    
+</SCRIPT>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Advocate Details</h1>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fa fa-users"></i>
+                                    Add Advocates
+                                </div>
+                                <div class="card-body">
+                                    <form role="form" method="post" action="{% url 'save_advocate' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Category">First Name</label><br>
+                                                    <input type="text" name="fname" class="form-control" id="category" placeholder="First Name" required pattern="[A-Za-z ]+" title="Characters only"><br>
+                                                </div>
+                                                 <div class="form-group">
+                                                  <label for="Category">Last Name</label><br>
+                                                    <input type="text" name="lname" class="form-control" id="category" placeholder="Last Name" required pattern="[A-Za-z ]+" title="Characters only"><br>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="Category">Address</label><br>
+                                                    <textarea name="address" class="form-control" id="exampleInputEmail1" required="" placeholder="Enter Address"> </textarea><br>
+                                                </div>
+                                                <div class="form-group"> 
+                                <label for="exampleInputPassword1">Gender</label> 
+                                <br>
+                                <input type="radio" name="gender" value="male" checked=""> Male
+                                <br>
+                                <input type="radio" name="gender" value="female"> Female<br>
+                              </div> 
+                              <div class="form-group"> 
+                                <label for="exampleInputEmail1">Mobile Number:</label> <input name="pno" type="text" class="form-control" id="exampleInputEmail1" placeholder="Your Phone Number" required="" pattern="[9876][0-9]{9}" title="Enter a valid mobile number" maxlength="10" minlength="10"> 
+                              </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="Category">Experience</label><br>
+                                                    <input type="text" name="experience" class="form-control" id="category" placeholder="Enter Experience" required ><br>
+                                                </div>
+                                                <div class="form-group">
+                        <label class="col-sm-3 control-label">Category</label>
+                        
+                            <select name="cat" required="" class="form-control">
+                             <option value="">SELECT</option>
+                          {% for c in categ_list %}
+                          <option value="{{c.cat_id}}">{{c.cat_name}}</option>
+                          {% endfor %}   
+                                
+                            </select><br>
+                        
+                    </div>
+                    <div class="form-group">
+                                <label for="contactstate">Photo</label>
+                                <input type="file" class="form-control"  name="Photo" id="newfile" required>
+                                <p class="help-block">Upload a valid passport-size photo</p>
+                            </div>
+                            <div class="form-group"> 
+                                <label for="exampleInputPassword1">Email ID:</label> 
+                                <input name="Email" type="email" class="form-control" id="exampleInputPassword1" placeholder="Your Email ID" required=""  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Invalid Email Format"><br>
+                              </div>
+                              <div class="form-group"> 
+                                <label for="exampleInputPassword1">Password:</label> 
+                                <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" title="Password must be at least 8 characters long and include at least one letter and one digit"required="">
+                              </div>
+                             
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="reset" class="btn btn-danger">Cancel</button>
+                                        <input type="hidden" name="categ_id" value="{{ category.cat_id }}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

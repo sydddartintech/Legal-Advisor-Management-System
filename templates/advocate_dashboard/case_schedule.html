@@ -1,0 +1,75 @@
+
+{% extends 'advocate_dashboard/adv_layout.html' %}
+{% load static %}
+{% block content %}
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Case Schedule List</h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fa fa-calendar"></i>
+                                         Case Schedule List
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            {% if sch_list|length != 0 %}
+                                        <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+                                            <thead>
+                                                <tr>
+                                                  <th>SL.NO</th> 
+                                                    <th>SCHEDULE DATE</th>  
+                                                    <th>REMARKS</th> 
+                                                    
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for sh in sch_list %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    
+                                                    <td>{{sh.sh_date|date:"d-m-Y"}}</td>
+                                                    <td>{{sh.remark}}</td>
+                                                    
+                                                </tr>
+                                                
+                                                {% endfor %}    
+                                            </tbody>
+                                        </table>
+                                        {% else %}
+      <font color="#337ab7" style="margin-left: 46px;">No Data Available...</font>
+    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}

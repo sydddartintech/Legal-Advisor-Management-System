@@ -1,0 +1,179 @@
+
+{% extends 'advocate_dashboard/adv_layout.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+  ul.timeline {
+    list-style-type: none;
+    position: relative;
+}
+ul.timeline:before {
+    content: ' ';
+    background: #d4d9df;
+    display: inline-block;
+    position: absolute;
+    left: 29px;
+    width: 2px;
+    height: 100%;
+    z-index: 400;
+}
+ul.timeline > li {
+    margin: 20px 0;
+    padding-left: 50px;
+}
+ul.timeline > li:before {
+    content: ' ';
+    background: white;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #22c0e8;
+    left: 20px;
+    width: 20px;
+    height: 20px;
+    z-index: 400;
+}
+.float-right {
+    padding-left: 200px;
+}
+</style>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+             
+            </div>
+            
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4"></h1>
+                       
+                        <!-- <div class="row">
+                            
+                            
+                        </div> -->
+                        <div class="row">
+                            <div class="col-xl-10">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-book-open"></i>
+                                         Case Details
+                                    </div>
+                                    <div class="card-body">
+
+                                        <table class="table">
+                                    
+                                    
+                                    
+                                   <tr>
+                                      <th>Case Number</th>
+                                      <td>{{case_list.case_no }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Category</th>
+                                      <td>{{case_list.cat_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Description</th>
+                                      <td>{{case_list.description}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Register Date</th>
+                                      <td>{{case_list.case_register_date|date:"d-m-Y"}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Start Date</th>
+                                      <td>{{case_list.case_start_date|date:"d-m-Y"}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Remark</th>
+                                      <td>{{case_list.remark}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Status</th>
+                                      <td>{{case_list.status}}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <th></th>
+                                      <td><a href="{% url 'case_history_view' case_list.case_no %}" class="btn btn-success btn-sm pull-right">CASE HISTORY</a>
+                                     <a href="{% url 'case_documents_view' case_list.case_no %}" class="btn btn-primary btn-sm">CASE DOCUMENTS</a></td>
+                                    </tr>
+
+                                </table>
+                
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                           <div class="row">
+                            <div class="col-xl-10">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        
+                                      <i class="fas fa-user"></i>  Client Details
+                                    </div>
+                                    <div class="card-body">
+                                      <table class="table">
+                                    
+                                    
+                                    
+                                   <tr>
+                                      <th>Photo</th>
+                                      <td><img src="{% get_media_prefix %}/{{ client_list.photo}}" alt="{{ client_list.first_name }} Photo" width="100" height="100"></td>
+                                    </tr>
+                                    <tr>
+                                      <th>Name</th>
+                                      <td>{{client_list.first_name}} {{client_list.last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Address</th>
+                                      <td>{{client_list.address}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Date Of Birth</th>
+                                      <td>{{client_list.dob|date:"d-m-Y"}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>Gender</th>
+                                      <td>{{client_list.gender}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>State</th>
+                                      <td>{{client_list.state}}</td>
+                                    </tr>
+                                    <tr>
+                                      <th>District</th>
+                                      <td>{{client_list.district}}</td>
+                                    </tr>
+                                     <th>Location</th>
+                                      <td>{{client_list.location}}</td>
+                                    </tr>
+                                     <th>Pincode</th>
+                                      <td>{{client_list.pin}}</td>
+                                    </tr>
+                                     <th>Mobile Number</th>
+                                      <td>{{client_list.mobile}}</td>
+                                    </tr>
+                                     <th>Email Id</th>
+                                      <td>{{client_list.email_id}}</td>
+
+                                    </tr>
+
+                                </table>
+  
+</div>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+          {% endblock %}
